@@ -1,7 +1,8 @@
 const axios = require("axios");
 
-const JANUS_URL = "https://janusapi.herokuapp.com" || "http://localhost:5000";
-const COMET_URL = "https://21379818571f3395.api-us.cometchat.io/v3";
+const JANUS_URL = "https://janusapi.herokuapp.com/" || "http://localhost:5000/";
+const COMET_URL = "https://21379818571f3395.api-us.cometchat.io/v3/";
+const API_KEY = 'ea96b6ec6390d2635fa38d7ff9143e9628970b7b'
 
 
 class Janus {
@@ -94,10 +95,152 @@ class Janus {
 
 class Comet {
 
+    /**Creates a user for the chat app */
+    static async createChatUser(uid, name) {
+        const resp = await axios({
+            method: "post",
+            url: `${COMET_URL}users`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            data: {
+                uid: uid,
+                name: name
+            }
+        })
+
+        return resp;
+    }
+
+    /**Get a single chat user */
+    static async getChatUser(uid) {
+        const resp = await axios({
+            method: "get",
+            url: `${COMET_URL}users/${uid}`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            }
+        })
+        
+        return resp;
+    }
+
+
+    /**Delete a chat user */
+    static async deleteChatUser(uid) {
+        const resp = await axios({
+            method: "delete",
+            url: `${COMET_URL}users/${uid}`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            }
+        })
+        
+        return resp;
+    }
+
+
+    /**Create a chat group */
+    static async createChatGroup(guid, name) {
+        const resp = await axios({
+            method: 'post',
+            url: `${COMET_URL}groups`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            data: {
+                type: "private",
+                name: name,
+                guid: guid,
+            }
+        })
+
+        return resp
+    }
+
+    /**Delete a chat group */
+    static async deleteChatGroup(guid) {
+        const resp = await  axios({
+            method: "delete",
+            url: `${COMET_URL}groups/${guid}`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+
+        })
+        return resp;
+    }
+
+    /**Add a member to a group */
+    static async addMemberToChatGroup(guid, memberuid) {
+        const resp = await axios({
+            method: 'post',
+            url: `${COMET_URL}groups/${guid}/members`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            data: {
+                participants: [memberuid]
+            }
+        })
+
+        return resp;
+    }
+
+    /**Send a message to the group */
+    static async sendMessage(guid, msg) {
+        const resp = await axios({
+            method: 'post',
+            url: `${COMET_URL}messages`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            data: {
+                category: 'message',
+                type: "text",
+                data: {
+                    text: msg
+                },
+                receiver: guid,
+                receiverType: "group",
+            }
+        })
+
+        return resp;
+    }
+
+    /**Gets a groups messages for the user */
+    static async getGroupMessages(guid) {
+        const resp = await axios({
+            method: 'get',
+            url: `${COMET_URL}groups/${guid}/messages`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            }
+        })
+
+        return resp;
+    }
 }
 
 
-exports = {
+module.exports = {
     Janus,
     Comet
 }
