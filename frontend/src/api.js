@@ -7,26 +7,37 @@ const API_KEY = 'ea96b6ec6390d2635fa38d7ff9143e9628970b7b'
 
 class Janus {
 
-    /**Creates a new user */
-    static async register(data) {
+    /**Creates a new student */
+    static async registerStudent(data) {
         const resp = await axios({
             method: 'post',
-            url: `${JANUS_URL}api/register`,
+            url: `${JANUS_URL}api/auth/register/student`,
             data: data
         });
 
-        return resp.data.user;
+        return resp.data.token;
+    }
+
+     /**Creates a new teacher */
+     static async registerTeacher(data) {
+        const resp = await axios({
+            method: 'post',
+            url: `${JANUS_URL}api/auth/register/teacher`,
+            data: data
+        });
+
+        return resp.data.token;
     }
 
     /**Authenticate a user */
     static async login(data) {
         const resp = await axios({
             method: "post",
-            url: `${JANUS_URL}api/login`,
+            url: `${JANUS_URL}api/auth/login`,
             data: data
         });
 
-        return resp.data.user;
+        return resp.data.token;
     }
 
     /**Returns JSON on all courses */
@@ -78,6 +89,17 @@ class Janus {
         })
 
         return resp.data.courses;
+    }
+
+    /**Assign a student to a course */
+    static async assign(data) {
+        const resp = await axios({
+            method: "post",
+            url: `${JANUS_URL}api/users/assign`,
+            data: data
+        });
+
+        return resp.data.assignedUser;
     }
 
     /**Deletes the requested course */
