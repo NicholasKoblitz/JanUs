@@ -37,65 +37,87 @@ class Janus {
             data: data
         });
 
-        return resp.data.token;
+        let token = resp.data.token;
+        let isTeacher = resp.data.isTeacher
+
+        return {token, isTeacher};
     }
 
     /**Returns JSON on all courses */
-    static async getAllCourses() {
+    static async getAllCourses(token) {
         const resp = await axios({
             method: "get",
-            url: `${JANUS_URL}api/courses`
+            url: `${JANUS_URL}api/courses`,
+            headers: {
+                authorization: `bearer ${token}`
+            }
         });
 
         return resp.data.courses;
     }
 
     /**Returns JSON of a single course */
-    static async getSingleCourse(course_id) {
+    static async getSingleCourse(courseId, token) {
         const resp = await axios({
             method: "get",
-            url: `${JANUS_URL}api/courses/${course_id}`,
+            url: `${JANUS_URL}api/courses/${courseId}`,
+            headers: {
+                authorization: `bearer ${token}`
+            }
         })
 
         return resp.data.course;
     }
 
     /**Create a new course */
-    static async createCourse(data) {
+    static async createCourse(data, token) {
         const resp = await axios({
             method: "post",
             url: `${JANUS_URL}api/courses`,
+            headers: {
+                authorization: `bearer ${token}`
+            },
             data: data
+
         })
 
         return resp.data.course;
     }
 
     /**Gets JSON for all the students based on the course */
-    static async getAllStudentsByCourse(course_id) {
+    static async getAllStudentsByCourse(course_id, token) {
         const resp = await axios({
             method: "get",
-            url: `${JANUS_URL}api/courses/${course_id}/users`
+            url: `${JANUS_URL}api/courses/${course_id}/users`,
+            headers: {
+                authorization: `bearer ${token}`
+            }
         })
 
         return resp.data.users;
     }
 
     /**Gets JSON for all the courses based on the student*/
-    static async getAllCoursesByStudent(user_id) {
+    static async getAllCoursesByStudent(username, token) {
         const resp = await axios({
             method: "get",
-            url: `${JANUS_URL}api/users/${user_id}/courses`
+            url: `${JANUS_URL}api/users/${username}/courses`,
+            headers: {
+                authorization: `bearer ${token}`
+            }
         })
 
         return resp.data.courses;
     }
 
     /**Assign a student to a course */
-    static async assign(data) {
+    static async assign(data, token) {
         const resp = await axios({
             method: "post",
             url: `${JANUS_URL}api/users/assign`,
+            headers: {
+                authorization: `bearer ${token}`
+            },
             data: data
         });
 
@@ -103,10 +125,13 @@ class Janus {
     }
 
     /**Deletes the requested course */
-    static async deleteCourse(course_id) {
+    static async deleteCourse(course_id, token) {
         const resp = await axios({
             method: 'delete',
-            url: `${JANUS_URL}api/courses/${course_id}/remove`
+            url: `${JANUS_URL}api/courses/${course_id}/remove`,
+            headers: {
+                authorization: `bearer ${token}`
+            }
         })
 
         return resp.data.msg;
@@ -188,6 +213,51 @@ class Comet {
         return resp
     }
 
+    static async getChatGroup(guid) {
+        const resp = await axios({
+            method: "get",
+            url: `${COMET_URL}groups/${guid}`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            }
+        })
+        
+        return resp;
+    }
+
+    /**Get all groups by course */
+    static async getGroupsByCourse(guid) {
+        const resp = await axios({
+            method: "get",
+            url: `${COMET_URL}groups?searchKey=${guid}`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }
+        })
+        
+        return resp;
+    }
+
+    /**Get group by student */
+    static async getGroupByStudent(username) {
+        const resp = await axios({
+            method: "get",
+            url: `${COMET_URL}groups?hasJoined=true`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                onBehalfOf: username
+            }
+        })
+        
+        return resp;
+    }
+
     /**Delete a chat group */
     static async deleteChatGroup(guid) {
         const resp = await  axios({
@@ -200,6 +270,21 @@ class Comet {
             },
 
         })
+        return resp;
+    }
+
+    /**Get Members of a group */
+    static async getGroupMembers(guid) {
+        const resp = await axios({
+            method: "get",
+            url: `${COMET_URL}groups/${guid}/members`,
+            headers: {
+                apiKey: API_KEY,
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            }
+        })
+        
         return resp;
     }
 
@@ -220,6 +305,8 @@ class Comet {
 
         return resp;
     }
+
+    
 
     /**Send a message to the group */
     static async sendMessage(guid, msg) {
