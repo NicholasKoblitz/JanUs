@@ -1,7 +1,10 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import {Janus} from '../api';
 import UserContext from "./UserContext";
+import '../styles/RegisterForm.css'
+import Navbar from "./Navbar";
+
 
 
 
@@ -15,18 +18,36 @@ const TeacherRegisterForm = () => {
     }
 
     const [formData, setFormData] = useState(INIT_STATE);
+    let error = useRef(null);
     const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
 
     const registerTeacher = async () => {
         let janusRes = await Janus.registerTeacher(formData);
-        setUser(formData.username)
-        localStorage.setItem("token", janusRes)
-        localStorage.setItem("currentUser", formData.username)
-        localStorage.setItem("isTeacher", true);
-        navigate(`/users/${formData.username}`)
-    }
 
+        if(janusRes.status === 400) {
+            error.current = janusRes.message;
+        }
+        else {
+            error.current = null
+            setUser(formData.username)
+            localStorage.setItem("token", janusRes)
+            localStorage.setItem("currentUser", formData.username)
+            localStorage.setItem("isTeacher", true);
+            localStorage.setItem('uid', formData.firstName);
+            navigate(`/users/${formData.username}`)
+        }
+    }
+        
+
+
+    let errorDiv = error.current ? 
+        <div className="error">
+            <span>{error.current}</span>
+        </div>
+        :
+        null;
+  
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData(formData => ({
@@ -42,8 +63,11 @@ const TeacherRegisterForm = () => {
     }
 
     return (
-        <div className="TeacherForm">
-            <form className="TeacherForm-Form" onSubmit={handleSubmit}>
+        <>
+            <Navbar/>
+             <div className="RegisterForm">
+                <h1>Teacher</h1>
+            <form className="RegisterForm-Form" onSubmit={handleSubmit}>
             <label htmlFor="firstName">First Name</label>
                 <input 
                     type="text"
@@ -72,9 +96,12 @@ const TeacherRegisterForm = () => {
                     value={formData.password}
                     onChange={handleChange}
                 />
+                {errorDiv}
                 <button>Register</button>
             </form>
         </div>
+        </>
+       
     )
 }
 

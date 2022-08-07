@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Comet } from "../api";
 import MemberCard from "./MemberCard";
+import '../styles/Group.css'
+import Navbar from "./Navbar";
 
 
 const Group = () => {
@@ -43,7 +45,7 @@ const Group = () => {
     let details = members ? 
         <>
             <h2>{group.data.data.name}</h2>
-            <h3>{group.data.data.guid}</h3>
+            <h3>Members</h3>
             {members.map(member => 
                 <MemberCard
                     key={`${member.name}-${member.uid}`}
@@ -79,7 +81,9 @@ const Group = () => {
 
 
     return (
-        <div className="GroupMembers">
+        <>
+            <Navbar/>
+            <div className="GroupMembers">
             
             <div className="AddMemberChatGroupForm">
             <form className="AddMemberChatGroupForm-form" onSubmit={handleSubmit}>
@@ -93,9 +97,11 @@ const Group = () => {
                 <button>Add to group</button>
             </form>
         </div>
-
+            
             {details}
         </div>
+        </>
+        
     )
 }
 

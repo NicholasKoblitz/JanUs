@@ -4,7 +4,7 @@ const MemberCard = ({name, uid}) => {
     return (
         <div className="MemberCard">
             <div className="MemberCard-title">
-                <h3>{name}</h3>
+                <h1>{name}</h1>
             </div>
             
         </div>

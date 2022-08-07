@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {Janus} from '../api'
-
+import '../styles/AddCourseForm.css'
+import Navbar from "./Navbar";
 
 const AddCourseForm = () => {
 
@@ -42,9 +43,11 @@ const AddCourseForm = () => {
     }
 
     return (
-        <div className="AddCourseForm">
+        <>
+        <Navbar/>
+            <div className="AddCourseForm">
             <form className="AddCourseForm-form" onSubmit={handleSubmit}>
-                <label htmlFor="courseId">CourseID</label>
+                <label htmlFor="courseId" id="id">Course ID</label>
                 <input
                     type="text"
                     name="courseId"
@@ -61,6 +64,8 @@ const AddCourseForm = () => {
                 <button>Add</button>
             </form>
         </div>
+        </>
+        
     )
 }
 

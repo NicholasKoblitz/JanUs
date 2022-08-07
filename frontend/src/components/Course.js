@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Janus, Comet } from "../api";
 import StudentCard from "./StudentCard";
+import '../styles/Course.css';
+import Navbar from "./Navbar";
 
 
 
@@ -25,6 +27,7 @@ const Course = () => {
                 setGroup(null);
 
                 let groups = await Comet.getGroupsByCourse(courseId);
+                console.log(groups)
                 if(groups.data.data === []) {
                     setGroups(null);
                 }
@@ -35,7 +38,7 @@ const Course = () => {
             else {
                 setGroups(null);
 
-                let group = await Comet.getGroupByStudent(localStorage.getItem("currentUser"));
+                let group = await Comet.getGroupByStudent(localStorage.getItem("uid"));
                 if(group.data.data === []) {
                     setGroup(null);
                 }
@@ -45,6 +48,7 @@ const Course = () => {
             }
             
             setCourse(res.name);
+           
 
             if(students === []) {
                 setStudents(null);
@@ -73,15 +77,15 @@ const Course = () => {
 
         let groupsDetails = groups ?
         <>
-            <ul>
+            
                 {groups.map(group => 
                     <Link to={`/groups/${group.guid}`} key={`${group.guid}-${group.name}`}>
-                        <li>
+                        
                             {group.name}
-                        </li>
+                        
                     </Link>)
                 }
-            </ul>
+           
         </>
         :
         null
@@ -90,9 +94,9 @@ const Course = () => {
         <>
             {group.map(g => 
                 <Link to={`/groups/${g.guid}/chat`} key={`${g.guid}-${g.name}`}>
-                    <li>
+                    
                         {g.name}
-                    </li>
+                    
                 </Link>)   
             }
         </>
@@ -101,7 +105,7 @@ const Course = () => {
 
 
     const createGroup = () => {
-        navigate('/groups/create')
+        navigate(`/courses/${courseId}/groups/create`)
     }
 
     const goToGroup = () => {
@@ -109,24 +113,27 @@ const Course = () => {
     }
 
     return (
-        <div className="Course">
+        <>
+            <Navbar/>
+            <div className="Course">
             <h2>{course}</h2>
-            {isTeacher ? 
-            <button onClick={createGroup}>Create Group</button>
-             : 
-             <button onClick={goToGroup}>Go to Group</button>}
-            <hr/>
+            
+            
             <div>
-                <h3>Students</h3>
+                <h3 className="Course-titles">Students</h3>
                 {details}
             </div>
-            <div>
+            <div className="Course-groups">
                 <h3>Groups</h3>
+                {isTeacher ? 
+            <button onClick={createGroup}>Create Group</button>
+             : 
+             null}
                 {isTeacher ? groupsDetails : groupDetails}
             </div>
-            
-
         </div>
+        </>
+        
     )
 
 }

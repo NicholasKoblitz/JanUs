@@ -1,6 +1,8 @@
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {Comet} from '../api';
+import '../styles/CreateGroupForm.css'
+import Navbar from "./Navbar";
 
 
 const CreateGroupForm = () => {
@@ -12,9 +14,10 @@ const CreateGroupForm = () => {
 
     const [formData, setFormData] = useState(INIT_STATE);
     const navigate = useNavigate();
+    const {courseId} = useParams();
 
     const createGroup = async () => {
-        await Comet.createChatGroup(formData.guid, formData.name);
+        await Comet.createChatGroup(formData.guid, formData.name, courseId);
         
         navigate(`/groups/${formData.guid}`)
     }
@@ -34,9 +37,11 @@ const CreateGroupForm = () => {
     }
 
     return (
-        <div className="CreateChatGroupForm">
+        <>
+        <Navbar/>
+            <div className="CreateChatGroupForm">
             <form className="CreateChatGroupForm-form" onSubmit={handleSubmit}>
-            <label htmlFor="guid">Group ID</label>
+            <label htmlFor="guid" id="id">Group ID</label>
                 <input 
                     type="text"
                     name="guid"
@@ -53,6 +58,8 @@ const CreateGroupForm = () => {
                 <button>Create group</button>
             </form>
         </div>
+        </>
+        
     )
 }
 

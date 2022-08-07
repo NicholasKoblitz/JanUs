@@ -1,46 +1,69 @@
 const axios = require("axios");
 
 const JANUS_URL = "https://janusapi.herokuapp.com/" || "http://localhost:5000/";
-const COMET_URL = "https://21379818571f3395.api-us.cometchat.io/v3/";
-const API_KEY = 'ea96b6ec6390d2635fa38d7ff9143e9628970b7b'
+const COMET_URL = "https://215851690468e749.api-us.cometchat.io/v3/";
+const API_KEY = '7a206718ea2245a90d00d043f313ab5192048e02'
 
 
 class Janus {
 
     /**Creates a new student */
     static async registerStudent(data) {
-        const resp = await axios({
-            method: 'post',
-            url: `${JANUS_URL}api/auth/register/student`,
-            data: data
-        });
-
-        return resp.data.token;
+        try {
+            const resp = await axios({
+                method: 'post',
+                url: `${JANUS_URL}api/auth/register/student`,
+                data: data
+            });
+    
+            return resp.data.token;
+        }
+        catch(err) {
+            let error = err.response.data.error
+            return error
+        }
+        
     }
 
      /**Creates a new teacher */
      static async registerTeacher(data) {
-        const resp = await axios({
-            method: 'post',
-            url: `${JANUS_URL}api/auth/register/teacher`,
-            data: data
-        });
-
-        return resp.data.token;
+        try {
+            const resp = await axios({
+                method: 'post',
+                url: `${JANUS_URL}api/auth/register/teacher`,
+                data: data
+            });
+    
+            return resp.data.token;
+        }
+        catch(err) {
+            let error = err.response.data.error
+            return error
+        }
+        
     }
 
     /**Authenticate a user */
     static async login(data) {
-        const resp = await axios({
-            method: "post",
-            url: `${JANUS_URL}api/auth/login`,
-            data: data
-        });
+        try {
+            const resp = await axios({
+                method: "post",
+                url: `${JANUS_URL}api/auth/login`,
+                data: data
+            });
+    
+            let token = resp.data.token;
+            let isTeacher = resp.data.isTeacher;
+            let firstName = resp.data.firstName;
+    
+            return {token, isTeacher, firstName}
+        }
+        catch(err) {
+            let error = err.response.data.error;
+            return error;
+        }
 
-        let token = resp.data.token;
-        let isTeacher = resp.data.isTeacher
-
-        return {token, isTeacher};
+       ;
     }
 
     /**Returns JSON on all courses */
@@ -112,16 +135,22 @@ class Janus {
 
     /**Assign a student to a course */
     static async assign(data, token) {
-        const resp = await axios({
-            method: "post",
-            url: `${JANUS_URL}api/users/assign`,
-            headers: {
-                authorization: `bearer ${token}`
-            },
-            data: data
-        });
-
-        return resp.data.assignedUser;
+        try {
+            const resp = await axios({
+                method: "post",
+                url: `${JANUS_URL}api/users/assign`,
+                headers: {
+                    authorization: `bearer ${token}`
+                },
+                data: data
+            });
+    
+            return resp.data.assignedUser;
+        }
+        catch(err) {
+            return err.response.data.error;
+        }
+        
     }
 
     /**Deletes the requested course */
@@ -194,7 +223,7 @@ class Comet {
 
 
     /**Create a chat group */
-    static async createChatGroup(guid, name) {
+    static async createChatGroup(guid, name, courseId) {
         const resp = await axios({
             method: 'post',
             url: `${COMET_URL}groups`,
@@ -207,6 +236,7 @@ class Comet {
                 type: "private",
                 name: name,
                 guid: guid,
+                tags: [courseId]
             }
         })
 
@@ -228,14 +258,14 @@ class Comet {
     }
 
     /**Get all groups by course */
-    static async getGroupsByCourse(guid) {
+    static async getGroupsByCourse(courseId) {
         const resp = await axios({
             method: "get",
-            url: `${COMET_URL}groups?searchKey=${guid}`,
+            url: `${COMET_URL}groups?withTags=true&tags=${courseId}`,
             headers: {
                 apiKey: API_KEY,
                 'Content-Type': 'application/json',
-                Accept: 'application/json',
+                Accept: 'application/json'
             }
         })
         
@@ -309,14 +339,15 @@ class Comet {
     
 
     /**Send a message to the group */
-    static async sendMessage(guid, msg) {
+    static async sendMessage(guid, msg, username) {
         const resp = await axios({
             method: 'post',
             url: `${COMET_URL}messages`,
             headers: {
                 apiKey: API_KEY,
                 'Content-Type': 'application/json',
-                Accept: 'application/json'
+                Accept: 'application/json',
+                onBehalfOf: username
             },
             data: {
                 category: 'message',

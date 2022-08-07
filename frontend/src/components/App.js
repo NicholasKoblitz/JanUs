@@ -1,8 +1,6 @@
-import '../styles/App.css';
+// import '../styles/App.css';
 import { useState } from 'react';
-import {Helmet} from 'react-helmet';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Navbar from './Navbar';
 import Homepage from './Homepage';
 import StudentRegisterForm from './StudentRegisterForm';
 import TeacherRegisterForm from './TeacherRegisterForm';
@@ -22,12 +20,8 @@ function App() {
 
   return (
     <div className="App">
-      <Helmet>
-        <link href="../styles/dist/output.css"/>
-      </Helmet>
       <BrowserRouter>
         <UserContext.Provider value={{setUser}}>
-          <Navbar/>
           <Routes>
             <Route exact path="/" element={<Homepage/>} />
             <Route exact path='/register/student' element={<StudentRegisterForm/>} />
@@ -36,9 +30,9 @@ function App() {
             <Route exact path="/users/:username" element={<Dashboard/>} />
             <Route exact path='/courses/create-course' element={<AddCourseForm/>} />
             <Route exact path="/courses/:courseId" element={<Course/>} />
-            <Route exact path='/groups/create' element={<CreateGroupForm/>} />
+            <Route exact path='/courses/:courseId/groups/create' element={<CreateGroupForm/>} />
             <Route exact path="/groups/:guid" element={<Group/>} />
-            <Route exact path='/groups/:courseId/chat' element={<GroupChat/>} />
+            <Route exact path='/groups/:guid/chat' element={<GroupChat/>} />
           </Routes>
         </UserContext.Provider>
       </BrowserRouter>

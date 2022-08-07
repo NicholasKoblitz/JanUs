@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import {NavLink} from 'react-router-dom'
 import UserContext from "./UserContext";
+import '../styles/Navbar.css'
 
 
 const Navbar = () => {
@@ -13,6 +14,7 @@ const Navbar = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("currentUser");
         localStorage.removeItem("isTeacher");
+        localStorage.removeItem('uid');
         setUser("");
     }
 
@@ -25,11 +27,11 @@ const Navbar = () => {
 
                 {loggedIn ? 
                 <div className="Navbar-signin-login">
-                    <NavLink to={`/users/${user}`}>{user}</NavLink>  <NavLink to='/' onClick={removeToken}>Logout</NavLink>
+                     <NavLink to={`/users/${user}`}>{user}</NavLink> / <NavLink to='/' onClick={removeToken}>Logout</NavLink>
             </div> 
             :
-            <div className="navbar-signin-login">
-                <NavLink to='/register/student'>Register</NavLink> / <NavLink to="/login">Login</NavLink>
+            <div className="Navbar-signin-login">
+                  <NavLink to='/register/student'>Register</NavLink> / <NavLink to="/login">Login</NavLink>
             </div>
                 }
             </div>
