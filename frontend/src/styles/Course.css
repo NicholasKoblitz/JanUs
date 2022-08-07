@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@200;400;900&display=swap');
+
+.Course h2 {
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    position: relative;
+    left: 3rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    border-bottom: 2px solid white;
+    max-width: 300px;
+    color: white;
+    font-family: 'Lexend Exa', sans-serif;
+}
+
+.Course-titles {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    position: relative;
+    left: 3rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    border-bottom: 2px solid white;
+    max-width: 300px;
+    color: white;
+    font-family: 'Lexend Exa', sans-serif;
+}
+
+.Course-groups {
+    position: absolute;
+    top: 14vh;
+    right: 15vw;
+    font-family: 'Lexend Exa', sans-serif;
+}
+
+.Course-groups h3 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    border-bottom: 2px solid white;
+    /* max-width: 300px; */
+    color: white;
+}
+
+
+.Course .StudentCard {
+    position: relative;
+    left: 3rem;
+    margin-bottom: 1rem;
+    border: 2px solid #3F4739;
+    border-radius: 15px;
+    max-width: 600px;
+    padding: .5rem 1rem;
+    background-color: #BACBA9;
+    font-family: 'Lexend Exa', sans-serif;
+
+}
+
+
+.Course .StudentCard-title {
+    font-size: 16px;
+    /* font-weight: 500; */
+}
+
+.Course a {
+    display: inline-block;
+    margin-bottom: 1rem;
+    border: 2px solid #3F4739;
+    border-radius: 15px;
+    width: 10vw;
+    padding: .5rem 1rem;
+    background-color: #BACBA9;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.Course a:hover {
+    background-color: #E1F4CB;
+}
+
+.Course button {
+    display: block;
+    border: 2px solid #3F4739;
+    border-radius: 5px;
+    padding: 2.5%  5%;
+    background-color: #BACBA9;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    margin-bottom: 2rem;
+}
+
+.Course button:hover {
+    background-color: #E1F4CB;
+}

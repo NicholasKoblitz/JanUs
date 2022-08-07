@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@200;400;900&display=swap');
+
+.Dashboard h1 {
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    position: relative;
+    left: 3rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    font-family: 'Lexend Exa', sans-serif;
+    color: white;
+}
+
+.Dashboard-courses h2 {
+    font-size: 25px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    border-bottom: 1px solid white;
+    max-width: 200px;
+    position: relative;
+    left: 3rem;
+    font-family: 'Lexend Exa', sans-serif;
+    color: white;
+    
+
+}
+
+.AddCourse-form {
+    position: relative;
+    left: 3rem;
+    margin-top: 1rem;
+    background-color: #BACBA9;
+    border: 2px solid #3F4739;
+    border-radius: 10px;
+    padding: 1rem;
+    max-width: 600px;
+    font-family: 'Lexend Exa', sans-serif;
+    color: #3F4739
+}
+
+.AddCourse-form label {
+    position: relative;
+    /* right: 18rem; */
+    font-size: 20px;
+    /* font-weight: 600; */
+}
+
+.AddCourse-form input {
+    display: block;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    padding: .5rem 1rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    margin-top: 0.5rem;
+
+}
+
+.AddCourse-form button {
+    border: 1px solid #3F4739;
+    border-radius: 5px;
+    padding:.5%  1%;
+    background-color: #E1F4CB;
+    /* font-weight: 600; */
+    margin-top: 1rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.AddCourse-form button:hover {
+    background-color: #717568;
+    color: white;
+}
+
+.Dashboard-course {
+    position: relative;
+    left: 3rem;
+    margin-top: 1rem;
+    font-family: 'Lexend Exa', sans-serif;
+}
+
+.Dashboard-course .CourseCard {
+    border: 2px solid #3F4739;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: .5rem 1rem;
+    max-width: 600px;
+    min-width: 600px;
+    -webkit-transition: 0.5s;
+    background-color: #BACBA9;
+    
+}
+
+.Dashboard-course .CourseCard:hover {
+    background-color: #E1F4CB;
+}
+
+.Dashboard-courses .CreateCourse {
+    border: 2px solid #3F4739;
+    border-radius: 5px;
+    padding:.5%  1%;
+    background-color: #BACBA9;
+    font-weight: 600;
+    margin-top: 1rem;
+    position: relative;
+    left: 3rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    
+}
+
+.Dashboard-courses .CreateCourse:hover {
+    background-color: #E1F4CB;
+}

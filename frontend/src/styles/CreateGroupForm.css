@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@200;400;900&display=swap');
+
+body {
+    background-color: #717568;
+}
+
+
+.CreateChatGroupForm {
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    margin-top: -50px;
+    margin-left: -100px;
+    font-family: 'Lexend Exa', sans-serif;
+}
+
+.CreateChatGroupForm-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 5px solid #3F4739;
+    border-radius: 20px;
+    padding: 3rem;
+    width: 300%;
+    height: 200%;
+    gap: 1rem;
+    background-color: #BACBA9;
+    color: #3F4739
+}
+
+.CreateChatGroupForm-form label {
+    position: relative;
+    right: 20.5rem;
+    font-size: 20px;
+}
+
+.CreateChatGroupForm-form #id {
+    position: relative;
+    right: 21.8rem;
+    font-size: 20px;
+}
+
+.CreateChatGroupForm-form input {
+    border: none;
+    border-radius: 3px;
+    width: 75%;
+    padding: .5rem 1rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+  
+}
+
+.CreateChatGroupForm-form button {
+    border: 2px solid #3F4739;
+    border-radius: 5px;
+    padding:.5%  1%;
+    background-color: #E1F4CB;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.CreateChatGroupForm-form button:hover {
+    background-color: #717568;
+    color: white;
+}
