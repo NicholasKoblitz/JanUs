@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const JANUS_URL = "https://janusapi.herokuapp.com/" || "http://localhost:5000/";
+const JANUS_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/";
 const COMET_URL = "https://215851690468e749.api-us.cometchat.io/v3/";
 const API_KEY = '7a206718ea2245a90d00d043f313ab5192048e02'
 
