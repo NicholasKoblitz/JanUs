@@ -18,13 +18,12 @@ const TeacherRegisterForm = () => {
     }
 
     const [formData, setFormData] = useState(INIT_STATE);
-    let error = useRef(null);
+    let error = useRef();
     const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
 
     const registerTeacher = async () => {
         let janusRes = await Janus.registerTeacher(formData);
-
         if(janusRes.status === 400) {
             error.current = janusRes.message;
         }

@@ -1,23 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@200;400;900&display=swap');
 
 .GroupChat-messages {
-    display: table-cell;
+    /* display: table-cell;
     width: 200px;
     height: 70vh;
     vertical-align: bottom;
-    font-family: 'Lexend Exa', sans-serif;
+    font-family: 'Lexend Exa', sans-serif; */
+    /* position: absolute;/ */
+    /* overflow: scroll; */
 
+}
+
+.message-list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-width: 50vw;
+    height: 78vh;
+    /* vertical-align:; */
+    font-family: 'Lexend Exa', sans-serif;
+    position: absolute;
+    left: 25.5vw;
+    top: 10vh;
+    scrollbar-width: none;
+}
+
+.message-list::-webkit-scrollbar {
+    display: none;
 }
 
 .GroupChat .messages-border {
     border: 5px solid #3F4739;
     border-radius: 10px;
     position: absolute;
-    width: 50vw;
-    height: 84vh;
-    left: 25vw;
-    bottom: 10vh;
+    /* position: relative; */
+    width: 49.4vw;
+    height: 85vh;
+    left: 25.3vw;
+    /* bottom: 10vh; */
     background-color: #E1F4CB;
+    /* z-index: -1; */
 }
 
 .GroupChat-messages .sender {
@@ -26,7 +47,7 @@
     border-bottom-right-radius: 5px;
     padding: 5px 10px;
     position: relative;
-    left: 58vw;
+    left: 37vw;
     /* bottom: 10vh; */
     background-color: #9FA9B5;
     margin-bottom: 1rem;
@@ -43,7 +64,7 @@
     border-bottom-left-radius: 5px;
     padding: 5px 10px;
     position: relative;
-    left: 30vw;
+    left: 3vw;
     /* bottom: 10vh; */
     background-color: #ADBFB6;
     margin-bottom: 1rem;
@@ -54,7 +75,7 @@
 
 .GroupChat-messages .message-name {
     position: relative;
-    left: 30.5vw;
+    left: 4vw;
     font-weight: 400;
     font-size: 12px;
 }
@@ -65,12 +86,13 @@
     align-items: center;
     flex-direction: row;
     position: relative;
-    left: 25vw;
+    left: 25.3vw;
+    top: 79vh;
     border: 5px solid #3F4739;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 2rem 1rem;
-    width: 50%;
+    width: 49.4%;
     height: 25%;
     gap: 1rem;
     background-color: #BACBA9;
@@ -100,5 +122,4 @@
 
 .GroupChat-form button:hover {
     background-color: #88919c;
-
 }

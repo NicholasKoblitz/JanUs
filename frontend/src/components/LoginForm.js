@@ -21,7 +21,6 @@ const LoginForm = () => {
 
     const login = async () => {
         let res = await Janus.login(formData);
-
         if(res.status === 401) {
             error.current = res.message;
         }

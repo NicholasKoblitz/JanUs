@@ -17,11 +17,10 @@ const GroupChat = () => {
     const uid = localStorage.getItem("uid")
     const {guid} = useParams();
 
-
+  
     useEffect(() => {
         async function fetchGroupMessages() {
             let res = await Comet.getGroupMessages(guid);
-            console.log(res.data.data);
 
             if(res.data.data === []) {
                 setMessages(null);
@@ -30,10 +29,9 @@ const GroupChat = () => {
                 setMessages(res.data.data);
             }
             setTrigger(0);
-            console.log(messages)
         }
         fetchGroupMessages();
-    },[trigger])
+    })
 
 
     const sendMessage = async () => {
@@ -58,7 +56,7 @@ const GroupChat = () => {
 
     const details = messages ? 
         <>
-            <ul >
+            <ul className="message-list">
                 {messages.map(message => {
                     if(message.sender === uid.toLowerCase()) {
                         return <li className="sender">{message.data.text}</li>
