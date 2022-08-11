@@ -16,27 +16,70 @@ const GroupChat = () => {
     const username = localStorage.getItem("currentUser");
     const uid = localStorage.getItem("uid")
     const {guid} = useParams();
+    const ws = new WebSocket(`ws://janusapi.herokuapp.com/api/ws/chat`)
 
-  
     useEffect(() => {
-        async function fetchGroupMessages() {
-            let res = await Comet.getGroupMessages(guid);
+        function fetchGroupMessages() {
+            ws.onopen = function(evt){
+                ws.send(guid)
+            }
 
-            if(res.data.data === []) {
-                setMessages(null);
+             ws.onmessage = function(evt) {
+                // console.log(JSON.parse(evt.data)) 
+                let data = JSON.parse(evt.data)
+                
+                let messageBody = document.querySelector('.message-list');
+                if(messageBody) {
+                    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+                }
+                if(data === []) {
+                    setMessages(null);
+                }
+                else {
+                    setMessages(data);
+                }
+               
             }
-            else {
-                setMessages(res.data.data);
-            }
-            setTrigger(0);
         }
         fetchGroupMessages();
     })
+  
+    // useEffect(() => {
+    //     async function fetchGroupMessages() {
+    //         let res = await Comet.getGroupMessages(guid);
+    //         let messageBody = document.querySelector('.message-list');
+    //         if(messageBody) {
+    //             messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+    //         }
+
+    //         if(res.data.data === []) {
+    //             setMessages(null);
+    //         }
+    //         else {
+    //             setMessages(res.data.data);
+    //         }
+    //         setTrigger(0)
+            
+    //     }
+    //     fetchGroupMessages();
+    // },[trigger])
+
+
+    // setInterval(function() {
+    //     if(trigger === 0) {
+    //     setTrigger(1)
+    //     }
+    //     else {
+    //         setTrigger(0)
+    //     }
+    // },3000)
 
 
     const sendMessage = async () => {
         await Comet.sendMessage(guid, formData.text, uid);
         setTrigger(1);
+        
+        
     } 
 
     const handleChange = (e) => {
@@ -51,6 +94,13 @@ const GroupChat = () => {
         e.preventDefault();
         sendMessage()
         setFormData(INIT_STATE);
+
+        // ws.send(
+        //     {
+        //         guid:guid,
+        //         text: formData.text,
+        //         uid: uid
+        //     })
     }
 
 
@@ -58,17 +108,20 @@ const GroupChat = () => {
         <>
             <ul className="message-list">
                 {messages.map(message => {
-                    if(message.sender === uid.toLowerCase()) {
-                        return <li className="sender">{message.data.text}</li>
-                    }
 
-                    return (
-                        <>
-                            <span className="message-name">{message.sender}</span>
-                            <li className="receiver">{message.data.text}</li>
-                        </>
-                    )
+                    if(!message.deletedAt) {
+                        if(message.sender === uid.toLowerCase()) {
+                     
+                            return <li className="sender" >{message.data.text}</li>
+                        }
                     
+                        return (
+                            <>
+                                <span className="message-name">{message.sender}</span>
+                                <li className="receiver" >{message.data.text}</li>
+                            </>
+                        )
+                    }
                 }
                     
                 )
@@ -80,12 +133,14 @@ const GroupChat = () => {
 
     return (
         <>
+        
             <Navbar/>
             <div className="GroupChat">
             
             <div className="GroupChat-messages">
                 <div className="messages-border"></div>
                 {details}
+                
             </div>
             <form className="GroupChat-form" onSubmit={handleSubmit}>
                 <input
@@ -97,6 +152,7 @@ const GroupChat = () => {
                     <button>Send</button>
             </form>
         </div>
+        
         </>
         
     )

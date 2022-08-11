@@ -12,16 +12,16 @@
 }
 
 .message-list {
+    display: table-cell;
     overflow-y: scroll;
     overflow-x: hidden;
     min-width: 50vw;
     height: 78vh;
-    /* vertical-align:; */
+    vertical-align:bottom;
     font-family: 'Lexend Exa', sans-serif;
     position: absolute;
     left: 25.5vw;
     top: 10vh;
-    scrollbar-width: none;
 }
 
 .message-list::-webkit-scrollbar {
