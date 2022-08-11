@@ -16,7 +16,7 @@ const GroupChat = () => {
     const username = localStorage.getItem("currentUser");
     const uid = localStorage.getItem("uid")
     const {guid} = useParams();
-    const ws = new WebSocket(`ws://janusapi.herokuapp.com/api/ws/chat`)
+    const ws = new WebSocket(`wss://janusapi.herokuapp.com/api/ws/chat`)
 
     useEffect(() => {
         function fetchGroupMessages() {
