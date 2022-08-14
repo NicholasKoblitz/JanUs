@@ -17,14 +17,13 @@ const GroupChat = () => {
     const {guid} = useParams();
     const ws = new WebSocket(`wss://janusapi.herokuapp.com/api/ws/chat`)
 
+
+    
+
     useEffect(() => {
-        function fetchGroupMessages() {
+        function fetchGroupMessagesAndSend() {
             ws.onopen = function(evt){
                 ws.send(guid)
-                let messageBody = document.querySelector('.message-list');
-                if(messageBody) {
-                    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
-                }
             }
 
              ws.onmessage = function(evt) {
@@ -39,8 +38,18 @@ const GroupChat = () => {
                 }
             }
         }
-        fetchGroupMessages();
+        fetchGroupMessagesAndSend();
     })
+
+    useEffect(() => {
+        function fetchGroupMessagesOnce() {
+            let messageBody = document.querySelector('.message-list');
+                if(messageBody) {
+                    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+                }
+        }
+        fetchGroupMessagesOnce();
+    },[])
 
     const sendMessage = async () => {
         await Comet.sendMessage(guid, formData.text, uid);
