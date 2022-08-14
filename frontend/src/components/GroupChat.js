@@ -12,7 +12,6 @@ const GroupChat = () => {
 
     const [formData, setFormData] = useState(INIT_STATE);
     const [messages, setMessages] = useState();
-    const [trigger, setTrigger] = useState();
     const username = localStorage.getItem("currentUser");
     const uid = localStorage.getItem("uid")
     const {guid} = useParams();
@@ -22,14 +21,16 @@ const GroupChat = () => {
         function fetchGroupMessages() {
             ws.onopen = function(evt){
                 ws.send(guid)
+                let messageBody = document.querySelector('.message-list');
+                if(messageBody) {
+                    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+                }
             }
 
              ws.onmessage = function(evt) {
                 // console.log(JSON.parse(evt.data)) 
                 let data = JSON.parse(evt.data)
-                
-                
-                
+
                 if(data === []) {
                     setMessages(null);
                 }
@@ -43,10 +44,6 @@ const GroupChat = () => {
 
     const sendMessage = async () => {
         await Comet.sendMessage(guid, formData.text, uid);
-        setTrigger(1);
-        
-        
-        
     } 
 
     const handleChange = (e) => {
@@ -57,7 +54,7 @@ const GroupChat = () => {
         }))
         let messageBody = document.querySelector('.message-list');
         if(messageBody) {
-        messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
         }
     }
 
@@ -79,10 +76,9 @@ const GroupChat = () => {
 
                     if(!message.deletedAt) {
                         if(message.sender === uid.toLowerCase()) {
-                     
                             return <li className="sender" >{message.data.text}</li>
                         }
-                    
+
                         return (
                             <>
                                 <span className="message-name">{message.sender}</span>
@@ -90,10 +86,7 @@ const GroupChat = () => {
                             </>
                         )
                     }
-                }
-                    
-                )
-                }
+                })}
             </ul>
             
         </> 
