@@ -380,7 +380,7 @@ export class Comet {
 }
 
 
-// module.exports = {
-//     Janus,
-//     Comet
-// }
+module.exports = {
+    Janus,
+    Comet
+}
