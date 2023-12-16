@@ -54,11 +54,18 @@ const StudentRegisterForm = () => {
         }))
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (async (e) => {
         e.preventDefault();
-        await registerStudent();
+        try {
+            await registerStudent();
+        }
+        catch(err) {
+            console.log("Testing error")
+            throw err;
+        }
+        
         setFormData(INIT_STATE);
-    }
+    })().catch( e => { console.error(e) })
 
     return (
         <>
