@@ -5,7 +5,7 @@ const COMET_URL = "https://215851690468e749.api-us.cometchat.io/v3/";
 const API_KEY = '7a206718ea2245a90d00d043f313ab5192048e02'
 
 
-export class Janus {
+class Janus {
 
     /**Creates a new student */
     static async registerStudent(data) {
@@ -169,7 +169,7 @@ export class Janus {
 }
 
 
-export class Comet {
+class Comet {
 
     /**Creates a user for the chat app */
     static async createChatUser(uid, name) {
