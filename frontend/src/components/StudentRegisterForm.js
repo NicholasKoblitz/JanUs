@@ -65,7 +65,7 @@ const StudentRegisterForm = () => {
         }
         
         setFormData(INIT_STATE);
-    })().catch( e => { console.error(e) })
+    })().catch( err => { console.error(err) })
 
     return (
         <>
