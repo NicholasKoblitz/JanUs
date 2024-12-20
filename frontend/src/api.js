@@ -1,6 +1,7 @@
 const axios = require("axios");
 
 const JANUS_URL = "https://pmbpgyeoydjkhwqgxbay.supabase.co/";
+const JANUS_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtYnBneWVveWRqa2h3cWd4YmF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMwMTU2NjcsImV4cCI6MjA0ODU5MTY2N30.VFtcf68tvTJ96EnVhzhSFty3OOwUb0oyOPtVkwTg6VM"
 const COMET_URL = "https://215851690468e749.api-us.cometchat.io/v3/";
 const API_KEY = '7a206718ea2245a90d00d043f313ab5192048e02'
 
@@ -13,6 +14,9 @@ export class Janus {
             const resp = await axios({
                 method: 'post',
                 url: `${JANUS_URL}api/auth/register/student`,
+                headers: {
+                    apiKey: JANUS_KEY
+                },
                 data: data
             });
     
@@ -31,6 +35,9 @@ export class Janus {
             const resp = await axios({
                 method: 'post',
                 url: `${JANUS_URL}api/auth/register/teacher`,
+                headers: {
+                    apiKey: JANUS_KEY
+                },
                 data: data
             });
     
@@ -49,6 +56,9 @@ export class Janus {
             const resp = await axios({
                 method: "post",
                 url: `${JANUS_URL}api/auth/login`,
+                headers: {
+                    apiKey: JANUS_KEY
+                },
                 data: data
             });
     
@@ -72,6 +82,7 @@ export class Janus {
             method: "get",
             url: `${JANUS_URL}api/courses`,
             headers: {
+                apiKey: JANUS_KEY,
                 authorization: `bearer ${token}`
             }
         });
@@ -85,6 +96,7 @@ export class Janus {
             method: "get",
             url: `${JANUS_URL}api/courses/${courseId}`,
             headers: {
+                apiKey: JANUS_KEY,
                 authorization: `bearer ${token}`
             }
         })
@@ -98,6 +110,7 @@ export class Janus {
             method: "post",
             url: `${JANUS_URL}api/courses`,
             headers: {
+                apiKey: JANUS_KEY,
                 authorization: `bearer ${token}`
             },
             data: data
@@ -113,6 +126,7 @@ export class Janus {
             method: "get",
             url: `${JANUS_URL}api/courses/${course_id}/users`,
             headers: {
+                apiKey: JANUS_KEY,
                 authorization: `bearer ${token}`
             }
         })
@@ -126,6 +140,7 @@ export class Janus {
             method: "get",
             url: `${JANUS_URL}api/users/${username}/courses`,
             headers: {
+                apiKey: JANUS_KEY,
                 authorization: `bearer ${token}`
             }
         })
@@ -140,6 +155,7 @@ export class Janus {
                 method: "post",
                 url: `${JANUS_URL}api/users/assign`,
                 headers: {
+                    apiKey: JANUS_KEY,
                     authorization: `bearer ${token}`
                 },
                 data: data
@@ -159,6 +175,7 @@ export class Janus {
             method: 'delete',
             url: `${JANUS_URL}api/courses/${course_id}/remove`,
             headers: {
+                apiKey: JANUS_KEY,
                 authorization: `bearer ${token}`
             }
         })
