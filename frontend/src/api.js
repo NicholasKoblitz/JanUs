@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const JANUS_URL = "postgresql://postgres.pmbpgyeoydjkhwqgxbay:hqTKe0v2uX32h5gg@aws-0-us-east-1.pooler.supabase.com:6543/postgres";
+const JANUS_URL = "https://pmbpgyeoydjkhwqgxbay.supabase.co";
 const COMET_URL = "https://215851690468e749.api-us.cometchat.io/v3/";
 const API_KEY = '7a206718ea2245a90d00d043f313ab5192048e02'
 
