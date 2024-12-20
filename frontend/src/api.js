@@ -15,7 +15,9 @@ export class Janus {
                 method: 'post',
                 url: `${JANUS_URL}api/auth/register/student`,
                 headers: {
-                    apiKey: JANUS_KEY
+                    apiKey: JANUS_KEY,
+                    "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
+
                 },
                 data: data
             });
@@ -36,7 +38,8 @@ export class Janus {
                 method: 'post',
                 url: `${JANUS_URL}api/auth/register/teacher`,
                 headers: {
-                    apiKey: JANUS_KEY
+                    apiKey: JANUS_KEY,
+                    "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
                 },
                 data: data
             });
@@ -57,7 +60,8 @@ export class Janus {
                 method: "post",
                 url: `${JANUS_URL}api/auth/login`,
                 headers: {
-                    apiKey: JANUS_KEY
+                    apiKey: JANUS_KEY,
+                    "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
                 },
                 data: data
             });
@@ -83,7 +87,8 @@ export class Janus {
             url: `${JANUS_URL}api/courses`,
             headers: {
                 apiKey: JANUS_KEY,
-                authorization: `bearer ${token}`
+                authorization: `bearer ${token}`,
+                "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
             }
         });
 
@@ -97,7 +102,8 @@ export class Janus {
             url: `${JANUS_URL}api/courses/${courseId}`,
             headers: {
                 apiKey: JANUS_KEY,
-                authorization: `bearer ${token}`
+                authorization: `bearer ${token}`,
+                "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
             }
         })
 
@@ -111,7 +117,8 @@ export class Janus {
             url: `${JANUS_URL}api/courses`,
             headers: {
                 apiKey: JANUS_KEY,
-                authorization: `bearer ${token}`
+                authorization: `bearer ${token}`,
+                "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
             },
             data: data
 
@@ -127,7 +134,8 @@ export class Janus {
             url: `${JANUS_URL}api/courses/${course_id}/users`,
             headers: {
                 apiKey: JANUS_KEY,
-                authorization: `bearer ${token}`
+                authorization: `bearer ${token}`,
+                "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
             }
         })
 
@@ -141,7 +149,8 @@ export class Janus {
             url: `${JANUS_URL}api/users/${username}/courses`,
             headers: {
                 apiKey: JANUS_KEY,
-                authorization: `bearer ${token}`
+                authorization: `bearer ${token}`,
+                "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
             }
         })
 
@@ -156,7 +165,8 @@ export class Janus {
                 url: `${JANUS_URL}api/users/assign`,
                 headers: {
                     apiKey: JANUS_KEY,
-                    authorization: `bearer ${token}`
+                    authorization: `bearer ${token}`,
+                    "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
                 },
                 data: data
             });
@@ -176,7 +186,8 @@ export class Janus {
             url: `${JANUS_URL}api/courses/${course_id}/remove`,
             headers: {
                 apiKey: JANUS_KEY,
-                authorization: `bearer ${token}`
+                authorization: `bearer ${token}`,
+                "Access-Control-Allow-Origin": "https://janus-project.netlify.app/"
             }
         })
 
