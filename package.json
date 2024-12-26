@@ -1,0 +1,30 @@
+{
+  "name": "janus",
+  "version": "1.0.0",
+  "description": "## Introduction",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.10",
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonschema": "^1.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^7.1.1",
+    "react-scripts": "^5.0.1",
+    "supertest": "^7.0.0",
+    "web-vitals": "^4.2.4"
+  }
+}

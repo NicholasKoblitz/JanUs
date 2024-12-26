@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@200;400;900&display=swap');
+
+.GroupChat-messages {
+    /* display: table-cell;
+    width: 200px;
+    height: 70vh;
+    vertical-align: bottom;
+    font-family: 'Lexend Exa', sans-serif; */
+    /* position: absolute;/ */
+    /* overflow: scroll; */
+
+}
+
+.message-list {
+    display: table-cell;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-width: 50vw;
+    height: 78vh;
+    vertical-align:bottom;
+    font-family: 'Lexend Exa', sans-serif;
+    position: absolute;
+    left: 25.5vw;
+    top: 10vh;
+}
+
+.message-list::-webkit-scrollbar {
+    display: none;
+}
+
+.GroupChat .messages-border {
+    border: 5px solid #3F4739;
+    border-radius: 10px;
+    position: absolute;
+    /* position: relative; */
+    width: 49.4vw;
+    height: 85vh;
+    left: 25.3vw;
+    /* bottom: 10vh; */
+    background-color: #E1F4CB;
+    /* z-index: -1; */
+}
+
+.GroupChat-messages .sender {
+    border: 2px solid black;
+    border-radius: 20px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 10px;
+    position: relative;
+    left: 37vw;
+    /* bottom: 10vh; */
+    background-color: #9FA9B5;
+    margin-bottom: 1rem;
+    max-width: 10vw;
+    word-wrap: break-word;
+    color: #252a21;
+
+
+}
+
+.GroupChat-messages .receiver {
+    border: 2px solid black;
+    border-radius: 20px;
+    border-bottom-left-radius: 5px;
+    padding: 5px 10px;
+    position: relative;
+    left: 3vw;
+    /* bottom: 10vh; */
+    background-color: #ADBFB6;
+    margin-bottom: 1rem;
+    max-width: 10vw;
+    word-wrap: break-word;
+    color: #252a21;
+}
+
+.GroupChat-messages .message-name {
+    position: relative;
+    left: 4vw;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.GroupChat-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    left: 25.3vw;
+    top: 79vh;
+    border: 5px solid #3F4739;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 2rem 1rem;
+    width: 49.4%;
+    height: 25%;
+    gap: 1rem;
+    background-color: #BACBA9;
+    color: #3F4739;
+    margin-top: 2rem;
+    font-family: 'Lexend Exa', sans-serif;
+}
+
+.GroupChat-form input {
+    border: none;
+    border-radius: 3px;
+    width: 75%;
+    padding: .25rem .25rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+.GroupChat-form button {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding:.25%  .5%;
+    background-color: #9FA9B5;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.GroupChat-form button:hover {
+    background-color: #88919c;
+}
